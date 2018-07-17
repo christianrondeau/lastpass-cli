@@ -43,10 +43,14 @@
 #include <unistd.h>
 #include <string.h>
 #include <fcntl.h>
+#ifdef __WIN32__
+#include <winsock2.h>
+#else
 #include <sys/socket.h>
-#include <sys/stat.h>
 #include <sys/un.h>
+#include <sys/stat.h>
 #include <sys/mman.h>
+#endif
 #include <errno.h>
 #include <signal.h>
 #if (defined(__unix__) || defined(unix)) && !defined(USG)

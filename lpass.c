@@ -199,6 +199,13 @@ int main(int argc, char *argv[])
 	if (http_init())
 		die("Unable to initialize curl");
 
+	// msys2: https://stackoverflow.com/questions/4638604/where-does-one-get-the-sys-socket-h-header-source-file
+	#ifdef __WIN32__
+		WORD versionWanted = MAKEWORD(1, 1);
+		WSADATA wsaData;
+		WSAStartup(versionWanted, &wsaData);
+	#endif
+
 	load_saved_environment();
 
 	if (argc >= 2 && argv[1][0] != '-')
